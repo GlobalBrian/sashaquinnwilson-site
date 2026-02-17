@@ -10,6 +10,13 @@
   --pop-4: #7bc1ff;
   --radius: 24px;
   --shadow: 0 22px 45px rgba(0, 0, 0, 0.35);
+  --studio-1: #f2f4f7;
+  --studio-2: #cfd8e8;
+  --pop-a: #ff6f8f;
+  --pop-b: #ffd166;
+  --pop-c: #61dafb;
+  --editorial-a: #d61f3c;
+  --editorial-b: #14070c;
 }
 
 * {
@@ -187,6 +194,33 @@ h1 span {
   margin-top: 1.2rem;
 }
 
+.tone-ribbon {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.9rem;
+}
+
+.tone-ribbon span {
+  border-radius: 999px;
+  padding: 0.3rem 0.58rem;
+  font-size: 0.72rem;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.tone-ribbon span:nth-child(1) {
+  color: #dbe9ff;
+}
+
+.tone-ribbon span:nth-child(2) {
+  color: #ffe08b;
+}
+
+.tone-ribbon span:nth-child(3) {
+  color: #ff9ca9;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
@@ -320,6 +354,41 @@ h1 span {
   font-size: 0.93rem;
 }
 
+.look-grid {
+  margin-top: 0.85rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.look-card {
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  padding: 0.9rem;
+}
+
+.look-card h3 {
+  font-size: 1.05rem;
+}
+
+.look-card p {
+  margin: 0.38rem 0 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.look-minimal {
+  background: linear-gradient(140deg, rgba(242, 244, 247, 0.17), rgba(207, 216, 232, 0.1));
+}
+
+.look-pop {
+  background: linear-gradient(140deg, rgba(255, 111, 143, 0.2), rgba(255, 209, 102, 0.14), rgba(97, 218, 251, 0.15));
+}
+
+.look-editorial {
+  background: linear-gradient(130deg, rgba(214, 31, 60, 0.24), rgba(20, 7, 12, 0.38));
+}
+
 .gallery-note {
   margin: 0.4rem 0 0.8rem;
 }
@@ -352,6 +421,18 @@ h1 span {
   border: 1px solid var(--line);
   background: #0f1422;
   transition: transform 240ms ease;
+}
+
+.gallery-card.tone-minimal {
+  border-color: rgba(216, 227, 244, 0.55);
+}
+
+.gallery-card.tone-pop {
+  border-color: rgba(255, 194, 117, 0.58);
+}
+
+.gallery-card.tone-editorial {
+  border-color: rgba(224, 71, 99, 0.58);
 }
 
 .gallery-card.tall {
@@ -458,6 +539,10 @@ h1 span {
   }
 
   .dna-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .look-grid {
     grid-template-columns: 1fr;
   }
 }

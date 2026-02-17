@@ -63,6 +63,13 @@ function getCardVariant(index) {
   return "";
 }
 
+function getToneClass(post = {}) {
+  const text = `${post.caption || ""}`.toLowerCase();
+  if (/red|editorial|fashion|portrait|glam/.test(text)) return "tone-editorial";
+  if (/disney|fun|happy|party|balloon|color/.test(text)) return "tone-pop";
+  return "tone-minimal";
+}
+
 function renderGallery(posts = []) {
   if (!Array.isArray(posts) || posts.length === 0) {
     mountEmptyState();
@@ -81,6 +88,7 @@ function renderGallery(posts = []) {
 
     const variant = getCardVariant(index);
     if (variant) card.classList.add(variant);
+    card.classList.add(getToneClass(post));
 
     link.href = post.permalink;
     image.src = post.mediaUrl;
