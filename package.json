@@ -1,0 +1,10 @@
+{
+  "name": "sasha-quinn-wilson-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync:instagram": "node ./scripts/fetch-instagram.mjs",
+    "serve": "npx serve ."
+  }
+}

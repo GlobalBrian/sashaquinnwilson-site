@@ -1,0 +1,41 @@
+name: Sync Instagram Gallery
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "15 */6 * * *"
+
+permissions:
+  contents: write
+
+jobs:
+  sync-instagram:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch posts from Instagram
+        env:
+          IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          IG_POST_LIMIT: "24"
+        run: node ./scripts/fetch-instagram.mjs
+
+      - name: Commit updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/posts.json
+          if git diff --cached --quiet; then
+            echo "No gallery updates"
+            exit 0
+          fi
+          git commit -m "chore: update Instagram gallery"
+          git push

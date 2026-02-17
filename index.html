@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sasha Quinn Wilson | Official Portfolio</title>
+    <meta
+      name="description"
+      content="Official portfolio for Sasha Quinn Wilson (Sassy) - model portfolio, featured collaborations, and latest campaign work."
+    />
+    <meta property="og:title" content="Sasha Quinn Wilson | Official Portfolio" />
+    <meta
+      property="og:description"
+      content="Explore Sasha Quinn Wilson's latest modeling work, collaborations, and campaign highlights."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sashaquinnwilson.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Manrope:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="aurora" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <a class="brand" href="#top">
+        <span class="brand-mark">SQ</span>
+        <span class="brand-name">Sasha Quinn Wilson</span>
+      </a>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#work">Work</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero reveal">
+        <p class="kicker">Official Website</p>
+        <h1>
+          Sasha Quinn Wilson
+          <span>"Sassy"</span>
+        </h1>
+        <p class="lead">
+          A unique young model with a bold personality, international brand experience, and a natural on-camera presence.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="https://www.instagram.com/sassyy_quinnnn" target="_blank" rel="noopener noreferrer">View Instagram</a>
+          <a class="btn btn-ghost" href="#gallery">See Latest Work</a>
+        </div>
+      </section>
+
+      <section id="about" class="panel reveal">
+        <h2>About Sasha</h2>
+        <p>
+          Sasha Quinn Wilson, known to family, friends, and followers as <strong>Sassy</strong>, has carried her signature confidence from day one.
+          She has collaborated with brands in Japan and global names including Nike and Disney.
+        </p>
+        <p>
+          This portfolio is designed to showcase her look, personality, and body of work for future partnerships, campaign casting, and creative opportunities.
+        </p>
+      </section>
+
+      <section id="work" class="panel reveal">
+        <h2>Featured Collaborations</h2>
+        <div class="chip-grid" role="list" aria-label="Featured brands">
+          <span class="chip" role="listitem">Nike</span>
+          <span class="chip" role="listitem">Disney</span>
+          <span class="chip" role="listitem">Japanese Brand Campaigns</span>
+          <span class="chip" role="listitem">International Lifestyle Shoots</span>
+        </div>
+      </section>
+
+      <section id="gallery" class="panel reveal">
+        <div class="section-head">
+          <h2>Latest Instagram Work</h2>
+          <a href="https://www.instagram.com/sassyy_quinnnn" target="_blank" rel="noopener noreferrer">@sassyy_quinnnn</a>
+        </div>
+        <p class="gallery-note">
+          This gallery is automatically updated from Instagram posts.
+        </p>
+        <div id="gallery-grid" class="gallery-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="contact" class="panel reveal">
+        <h2>Bookings & Collaborations</h2>
+        <p>
+          For campaign inquiries, partnerships, and booking opportunities, contact the Wilson family team.
+        </p>
+        <a class="btn btn-primary" href="mailto:megumegu0214@gmail.com">megumegu0214@gmail.com</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> Sasha Quinn Wilson. All rights reserved.</p>
+    </footer>
+
+    <template id="gallery-card-template">
+      <article class="gallery-card">
+        <a class="gallery-link" target="_blank" rel="noopener noreferrer">
+          <img class="gallery-image" alt="" loading="lazy" />
+          <div class="gallery-overlay">
+            <span class="gallery-date"></span>
+            <span class="gallery-cta">View Post</span>
+          </div>
+        </a>
+      </article>
+    </template>
+
+    <script src="./app.js" type="module"></script>
+  </body>
+</html>
