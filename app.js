@@ -9,8 +9,8 @@ const langJaBtn = document.querySelector("#lang-ja");
 const fallbackHeroSrc = "./content/hero-placeholder.jpg";
 const languageStorageKey = "sqw-language";
 
-let currentLanguage = localStorage.getItem(languageStorageKey) || "en";
 let currentPosts = [];
+let currentLanguage = "en";
 
 const translations = {
   en: {
@@ -250,7 +250,25 @@ function getStrings() {
   return translations[currentLanguage]?.strings || translations.en.strings;
 }
 
+function loadSavedLanguage() {
+  try {
+    const stored = localStorage.getItem(languageStorageKey);
+    if (stored === "en" || stored === "ja") currentLanguage = stored;
+  } catch (_) {
+    currentLanguage = "en";
+  }
+}
+
+function persistLanguage(languageCode) {
+  try {
+    localStorage.setItem(languageStorageKey, languageCode);
+  } catch (_) {
+    // Ignore storage failures (private mode / strict browser settings).
+  }
+}
+
 function updateLanguageButtons() {
+  if (!langEnBtn || !langJaBtn) return;
   langEnBtn.classList.toggle("is-active", currentLanguage === "en");
   langJaBtn.classList.toggle("is-active", currentLanguage === "ja");
 }
@@ -415,12 +433,13 @@ function rerenderLocalizedDynamicParts() {
 function setLanguage(languageCode) {
   if (!["en", "ja"].includes(languageCode)) return;
   currentLanguage = languageCode;
-  localStorage.setItem(languageStorageKey, currentLanguage);
+  persistLanguage(currentLanguage);
   applyLanguageText();
   rerenderLocalizedDynamicParts();
 }
 
 function setupLanguageSwitch() {
+  if (!langEnBtn || !langJaBtn) return;
   langEnBtn.addEventListener("click", () => setLanguage("en"));
   langJaBtn.addEventListener("click", () => setLanguage("ja"));
 }
@@ -456,6 +475,7 @@ function setupReveal() {
   targets.forEach((el) => observer.observe(el));
 }
 
+loadSavedLanguage();
 applyLanguageText();
 setupLanguageSwitch();
 setupReveal();
