@@ -349,6 +349,18 @@ h1 span {
   line-height: 1.65;
 }
 
+#about {
+  background: linear-gradient(140deg, rgba(238, 244, 255, 0.12), rgba(133, 194, 255, 0.1), rgba(255, 255, 255, 0.04));
+}
+
+#about h2 {
+  color: #d9edff;
+}
+
+#about p {
+  color: #e6eef8;
+}
+
 .section-head {
   display: flex;
   justify-content: space-between;
@@ -375,10 +387,18 @@ h1 span {
   gap: 0.8rem;
 }
 
+#style {
+  background: linear-gradient(140deg, rgba(255, 121, 157, 0.13), rgba(255, 209, 102, 0.11), rgba(255, 255, 255, 0.04));
+}
+
+#style h2 {
+  color: #ffe4ae;
+}
+
 .dna-card {
   border-radius: 18px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 226, 173, 0.35);
+  background: rgba(255, 255, 255, 0.08);
   padding: 0.9rem;
 }
 
@@ -387,17 +407,19 @@ h1 span {
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--pop-3);
+  color: #fff0b8;
 }
 
 .dna-card h3 {
   margin-top: 0.35rem;
   font-size: 1.06rem;
+  color: #fff7df;
 }
 
 .dna-card p {
   margin-top: 0.4rem;
   font-size: 0.93rem;
+  color: #fff2d1;
 }
 
 .look-grid {
@@ -442,15 +464,28 @@ h1 span {
   gap: 0.8rem;
 }
 
+#personality {
+  background: linear-gradient(140deg, rgba(255, 111, 143, 0.14), rgba(98, 218, 251, 0.11), rgba(255, 255, 255, 0.04));
+}
+
+#personality h2 {
+  color: #ffd3df;
+}
+
+#personality > p {
+  color: #ffe7ee;
+}
+
 .personality-card {
   border-radius: 18px;
-  border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 188, 208, 0.35);
+  background: rgba(255, 255, 255, 0.08);
   padding: 0.9rem;
 }
 
 .personality-card h3 {
   font-size: 1.04rem;
+  color: #ffe2ec;
 }
 
 .pill-row {
@@ -462,12 +497,13 @@ h1 span {
 
 .pill {
   display: inline-flex;
-  border: 1px solid var(--line);
+  border: 1px solid rgba(255, 208, 221, 0.45);
   border-radius: 999px;
   padding: 0.32rem 0.6rem;
   font-size: 0.78rem;
   line-height: 1.2;
-  background: rgba(255, 255, 255, 0.04);
+  color: #ffeef3;
+  background: rgba(255, 122, 170, 0.16);
 }
 
 .gallery-note {
