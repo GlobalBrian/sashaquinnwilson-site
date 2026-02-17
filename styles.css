@@ -133,6 +133,10 @@ main {
   gap: 1.2rem;
 }
 
+section[id] {
+  scroll-margin-top: 7.2rem;
+}
+
 .hero,
 .panel {
   border: 1px solid var(--line);
@@ -610,5 +614,9 @@ h1 span {
   .gallery-card.wide .gallery-image,
   .gallery-image {
     aspect-ratio: 1 / 1;
+  }
+
+  section[id] {
+    scroll-margin-top: 9.4rem;
   }
 }
