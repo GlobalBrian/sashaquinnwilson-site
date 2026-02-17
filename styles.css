@@ -252,6 +252,48 @@ h1 span {
   gap: 0.8rem;
 }
 
+.hero-visual {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.hero-photo-frame {
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: linear-gradient(160deg, rgba(224, 231, 243, 0.2), rgba(114, 196, 238, 0.18), rgba(255, 153, 177, 0.18));
+}
+
+.hero-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-photo-caption {
+  margin: 0;
+  padding: 0.6rem 0.7rem;
+  font-size: 0.78rem;
+  color: #f2f0e9;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(11, 14, 24, 0.65);
+}
+
+.hero-photo-frame.is-empty .hero-photo {
+  display: none;
+}
+
+.hero-photo-frame.is-empty .hero-photo-caption {
+  min-height: 210px;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
 .spot-card {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--line);

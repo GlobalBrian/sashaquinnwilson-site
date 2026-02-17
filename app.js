@@ -2,6 +2,9 @@ const grid = document.querySelector("#gallery-grid");
 const template = document.querySelector("#gallery-card-template");
 const year = document.querySelector("#year");
 const tagCloud = document.querySelector("#tag-cloud");
+const heroPhoto = document.querySelector("#hero-photo");
+const heroPhotoFrame = document.querySelector("#hero-photo-frame");
+const heroPhotoCaption = document.querySelector("#hero-photo-caption");
 
 year.textContent = new Date().getFullYear();
 
@@ -102,14 +105,33 @@ function renderGallery(posts = []) {
   if (!grid.children.length) mountEmptyState();
 }
 
+function renderHeroPhoto(posts = []) {
+  if (!heroPhoto || !heroPhotoFrame || !heroPhotoCaption) return;
+
+  const featured = Array.isArray(posts) ? posts.find((post) => post.mediaUrl) : null;
+  if (!featured) {
+    heroPhoto.removeAttribute("src");
+    heroPhotoFrame.classList.add("is-empty");
+    heroPhotoCaption.textContent = "Featured portrait appears here once Instagram sync is active.";
+    return;
+  }
+
+  heroPhoto.src = featured.mediaUrl;
+  heroPhotoFrame.classList.remove("is-empty");
+  heroPhotoCaption.textContent = cleanCaption(featured.caption) || "Latest featured photo from Instagram";
+}
+
 async function loadInstagramData() {
   try {
     const response = await fetch("./content/posts.json", { cache: "no-store" });
     if (!response.ok) throw new Error("Unable to load posts");
     const data = await response.json();
-    renderTagCloud(data.posts || []);
-    renderGallery(data.posts);
+    const posts = data.posts || [];
+    renderHeroPhoto(posts);
+    renderTagCloud(posts);
+    renderGallery(posts);
   } catch (error) {
+    renderHeroPhoto([]);
     mountEmptyState();
     console.error(error);
   }
