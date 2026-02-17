@@ -30,6 +30,10 @@ body {
   scroll-behavior: smooth;
 }
 
+html {
+  scroll-padding-top: 8rem;
+}
+
 body {
   font-family: "Outfit", sans-serif;
   color: var(--text);
@@ -173,6 +177,10 @@ main {
 
 section[id] {
   scroll-margin-top: 7.2rem;
+}
+
+#top {
+  scroll-margin-top: 8rem;
 }
 
 .hero,
@@ -737,6 +745,10 @@ h1 span {
   section[id] {
     scroll-margin-top: 9.4rem;
   }
+
+  #top {
+    scroll-margin-top: 10.8rem;
+  }
 }
 
 @media (max-width: 1060px) {
@@ -759,5 +771,11 @@ h1 span {
 
   nav {
     justify-content: center;
+  }
+}
+
+@media (max-width: 1060px) {
+  html {
+    scroll-padding-top: 10.8rem;
   }
 }
