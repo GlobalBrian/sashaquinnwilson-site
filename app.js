@@ -5,6 +5,7 @@ const tagCloud = document.querySelector("#tag-cloud");
 const heroPhoto = document.querySelector("#hero-photo");
 const heroPhotoFrame = document.querySelector("#hero-photo-frame");
 const heroPhotoCaption = document.querySelector("#hero-photo-caption");
+const fallbackHeroSrc = "./content/hero-placeholder.jpg";
 
 year.textContent = new Date().getFullYear();
 
@@ -110,9 +111,18 @@ function renderHeroPhoto(posts = []) {
 
   const featured = Array.isArray(posts) ? posts.find((post) => post.mediaUrl) : null;
   if (!featured) {
-    heroPhoto.removeAttribute("src");
     heroPhotoFrame.classList.add("is-empty");
-    heroPhotoCaption.textContent = "Featured portrait appears here once Instagram sync is active.";
+    heroPhotoCaption.textContent = "Add content/hero-placeholder.jpg to preview a featured portrait now.";
+    heroPhoto.onload = () => {
+      heroPhotoFrame.classList.remove("is-empty");
+      heroPhotoCaption.textContent = "Featured portrait preview";
+    };
+    heroPhoto.onerror = () => {
+      heroPhoto.removeAttribute("src");
+      heroPhotoFrame.classList.add("is-empty");
+      heroPhotoCaption.textContent = "Featured portrait appears here once Instagram sync is active.";
+    };
+    heroPhoto.src = fallbackHeroSrc;
     return;
   }
 
