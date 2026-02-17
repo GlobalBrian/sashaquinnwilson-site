@@ -111,6 +111,12 @@ body {
   letter-spacing: 0.01em;
 }
 
+.header-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
 nav {
   display: flex;
   gap: 0.95rem;
@@ -124,6 +130,30 @@ nav a {
 
 nav a:hover {
   color: var(--text);
+}
+
+.lang-switch {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.lang-btn {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  padding: 0.42rem 0.62rem;
+  cursor: pointer;
+}
+
+.lang-btn.is-active {
+  background: rgba(255, 213, 93, 0.2);
+  color: #fff7df;
 }
 
 main {
@@ -673,6 +703,11 @@ h1 span {
     border-radius: 20px;
     flex-direction: column;
     gap: 0.65rem;
+  }
+
+  .header-tools {
+    width: 100%;
+    flex-direction: column;
   }
 
   nav {

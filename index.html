@@ -32,34 +32,40 @@
         <span class="brand-mark">SQ</span>
         <span class="brand-name">Sasha Quinn Wilson</span>
       </a>
-      <nav>
-        <a href="#about">About</a>
-        <a href="#style">Style</a>
-        <a href="#personality">Personality</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact">Contact</a>
-      </nav>
+      <div class="header-tools">
+        <nav>
+          <a id="nav-about" href="#about">About</a>
+          <a id="nav-style" href="#style">Style</a>
+          <a id="nav-personality" href="#personality">Personality</a>
+          <a id="nav-gallery" href="#gallery">Gallery</a>
+          <a id="nav-contact" href="#contact">Contact</a>
+        </nav>
+        <div class="lang-switch" aria-label="Language switcher">
+          <button id="lang-en" class="lang-btn is-active" type="button">EN</button>
+          <button id="lang-ja" class="lang-btn" type="button">日本語</button>
+        </div>
+      </div>
     </header>
 
     <main id="top">
       <section class="hero reveal">
         <div class="hero-copy">
-          <p class="kicker">Official Model Portfolio</p>
+          <p id="hero-kicker" class="kicker">Official Model Portfolio</p>
           <h1>
             Sasha Quinn Wilson
-            <span>aka Sassy</span>
+            <span id="hero-subtitle">aka Sassy</span>
           </h1>
-          <p class="lead">
+          <p id="hero-lead" class="lead">
             Big personality. Sharp camera instincts. Global-ready energy. Sasha brings playful edge and polished confidence to every frame.
           </p>
           <div class="hero-cta">
-            <a class="btn btn-primary" href="https://www.instagram.com/sassyy_quinnnn" target="_blank" rel="noopener noreferrer">View Instagram</a>
-            <a class="btn btn-ghost" href="#gallery">See Latest Work</a>
+            <a id="hero-cta-instagram" class="btn btn-primary" href="https://www.instagram.com/sassyy_quinnnn" target="_blank" rel="noopener noreferrer">View Instagram</a>
+            <a id="hero-cta-work" class="btn btn-ghost" href="#gallery">See Latest Work</a>
           </div>
           <div class="tone-ribbon" aria-label="Signature color directions">
-            <span>Studio Minimal</span>
-            <span>Playful Pop</span>
-            <span>Editorial Red</span>
+            <span id="tone-1">Studio Minimal</span>
+            <span id="tone-2">Playful Pop</span>
+            <span id="tone-3">Editorial Red</span>
           </div>
         </div>
 
@@ -70,16 +76,17 @@
           </figure>
           <div class="hero-cards" aria-label="Profile highlights">
             <article class="spot-card">
-              <h2>Global Reach</h2>
-              <p>Campaign collaborations in Japan + international brand visibility.</p>
+              <h2 id="spot-global-title">Global Reach</h2>
+              <p id="spot-global-copy">Campaign collaborations in Japan + international brand visibility.</p>
             </article>
             <article class="spot-card">
-              <h2>Brand Fit</h2>
-              <p>Lifestyle, fashion, family, sport, and character-led creative shoots.</p>
+              <h2 id="spot-fit-title">Brand Fit</h2>
+              <p id="spot-fit-copy">Lifestyle, fashion, family, sport, and character-led creative shoots.</p>
             </article>
             <article class="spot-card sticker-card">
-              <p>SASSY
-                <span>from day one</span>
+              <p>
+                SASSY
+                <span id="spot-sticker">from day one</span>
               </p>
             </article>
           </div>
@@ -88,13 +95,13 @@
 
       <section id="about" class="panel reveal">
         <div class="section-head">
-          <h2>About Sasha</h2>
+          <h2 id="about-title">About Sasha</h2>
         </div>
-        <p>
+        <p id="about-copy-1">
           Sasha Quinn Wilson is known for her expressive style, natural confidence, and vibrant personality. Family and followers call her
           <strong>Sassy</strong> for a reason.
         </p>
-        <p>
+        <p id="about-copy-2">
           She has worked with brands in Japan and globally recognized names including Nike and Disney, building a portfolio that blends joy,
           individuality, and professional camera presence.
         </p>
@@ -102,85 +109,85 @@
 
       <section id="style" class="panel reveal">
         <div class="section-head">
-          <h2>Sassy Style DNA</h2>
+          <h2 id="style-title">Sassy Style DNA</h2>
         </div>
         <div class="dna-grid" role="list" aria-label="Sasha style attributes">
           <article class="dna-card" role="listitem">
-            <p class="dna-label">Expression</p>
-            <h3>Fearless Personality</h3>
-            <p>Strong facial storytelling with playful confidence and character.</p>
+            <p id="dna-label-1" class="dna-label">Expression</p>
+            <h3 id="dna-title-1">Fearless Personality</h3>
+            <p id="dna-copy-1">Strong facial storytelling with playful confidence and character.</p>
           </article>
           <article class="dna-card" role="listitem">
-            <p class="dna-label">Movement</p>
-            <h3>Natural Posing</h3>
-            <p>Effortless transitions between editorial stills and energetic lifestyle moments.</p>
+            <p id="dna-label-2" class="dna-label">Movement</p>
+            <h3 id="dna-title-2">Natural Posing</h3>
+            <p id="dna-copy-2">Effortless transitions between editorial stills and energetic lifestyle moments.</p>
           </article>
           <article class="dna-card" role="listitem">
-            <p class="dna-label">Presence</p>
-            <h3>Camera Magnetism</h3>
-            <p>A unique look that reads premium, modern, and memorable across campaigns.</p>
+            <p id="dna-label-3" class="dna-label">Presence</p>
+            <h3 id="dna-title-3">Camera Magnetism</h3>
+            <p id="dna-copy-3">A unique look that reads premium, modern, and memorable across campaigns.</p>
           </article>
         </div>
       </section>
 
       <section class="panel reveal">
         <div class="section-head">
-          <h2>Signature Looks</h2>
+          <h2 id="looks-title">Signature Looks</h2>
         </div>
         <div class="look-grid" role="list" aria-label="Sasha signature looks">
           <article class="look-card look-minimal" role="listitem">
-            <h3>Studio Minimal</h3>
-            <p>Soft ivory and powder tones for premium catalog and clean-brand campaigns.</p>
+            <h3 id="look-title-1">Studio Minimal</h3>
+            <p id="look-copy-1">Soft ivory and powder tones for premium catalog and clean-brand campaigns.</p>
           </article>
           <article class="look-card look-pop" role="listitem">
-            <h3>Playful Color Pop</h3>
-            <p>Bright balloons, vivid sets, and joyful movement for energetic youth content.</p>
+            <h3 id="look-title-2">Playful Color Pop</h3>
+            <p id="look-copy-2">Bright balloons, vivid sets, and joyful movement for energetic youth content.</p>
           </article>
           <article class="look-card look-editorial" role="listitem">
-            <h3>Editorial Drama</h3>
-            <p>High-contrast styling and expressive gaze for fashion-forward statement imagery.</p>
+            <h3 id="look-title-3">Editorial Drama</h3>
+            <p id="look-copy-3">High-contrast styling and expressive gaze for fashion-forward statement imagery.</p>
           </article>
         </div>
       </section>
 
       <section id="personality" class="panel reveal">
         <div class="section-head">
-          <h2>Off Camera</h2>
+          <h2 id="personality-title">Off Camera</h2>
         </div>
-        <p>
+        <p id="personality-intro">
           Beyond modeling, Sasha brings bright energy, fearless confidence, and genuine joy into every room. Her personality makes her easy to
           direct, fun to work with, and naturally memorable on set.
         </p>
         <div class="personality-grid" role="list" aria-label="Sasha personality profile">
           <article class="personality-card" role="listitem">
-            <h3>Hobbies</h3>
+            <h3 id="hobby-title">Hobbies</h3>
             <p class="pill-row">
-              <span class="pill">Dance practice</span>
-              <span class="pill">Learning new moves</span>
-              <span class="pill">Creative play</span>
-              <span class="pill">Performing for family</span>
+              <span id="hobby-1" class="pill">Dance practice</span>
+              <span id="hobby-2" class="pill">Learning new moves</span>
+              <span id="hobby-3" class="pill">Creative play</span>
+              <span id="hobby-4" class="pill">Performing for family</span>
             </p>
           </article>
           <article class="personality-card" role="listitem">
-            <h3>Likes</h3>
+            <h3 id="likes-title">Likes</h3>
             <p class="pill-row">
-              <span class="pill">Dancing</span>
-              <span class="pill">Sweets</span>
-              <span class="pill">Okra</span>
-              <span class="pill">Egg Lover</span>
-              <span class="pill">Making people laugh</span>
-              <span class="pill">Family time</span>
-              <span class="pill">Big brother adventures</span>
+              <span id="like-1" class="pill">Dancing</span>
+              <span id="like-2" class="pill">Sweets</span>
+              <span id="like-3" class="pill">Okra</span>
+              <span id="like-4" class="pill">Egg Lover</span>
+              <span id="like-5" class="pill">Making people laugh</span>
+              <span id="like-6" class="pill">Family time</span>
+              <span id="like-7" class="pill">Big brother adventures</span>
             </p>
           </article>
           <article class="personality-card" role="listitem">
-            <h3>Personality Notes</h3>
+            <h3 id="notes-title">Personality Notes</h3>
             <p class="pill-row">
-              <span class="pill">Independent spirit</span>
-              <span class="pill">Social butterfly</span>
-              <span class="pill">Fearless energy</span>
-              <span class="pill">Prefers freedom over strict direction</span>
-              <span class="pill">Not a fan of toy cleanup time</span>
+              <span id="note-1" class="pill">Independent spirit</span>
+              <span id="note-2" class="pill">Social butterfly</span>
+              <span id="note-3" class="pill">Fearless energy</span>
+              <span id="note-4" class="pill">Prefers freedom over strict direction</span>
+              <span id="note-5" class="pill">Not a fan of toy cleanup time</span>
             </p>
           </article>
         </div>
@@ -188,23 +195,23 @@
 
       <section id="gallery" class="panel reveal">
         <div class="section-head">
-          <h2>Latest Instagram Lookbook</h2>
+          <h2 id="gallery-title">Latest Instagram Lookbook</h2>
           <a href="https://www.instagram.com/sassyy_quinnnn" target="_blank" rel="noopener noreferrer">@sassyy_quinnnn</a>
         </div>
-        <p class="gallery-note">Auto-refreshed from Instagram to keep Sasha's current work visible for new opportunities.</p>
+        <p id="gallery-note" class="gallery-note">Auto-refreshed from Instagram to keep Sasha's current work visible for new opportunities.</p>
         <div id="tag-cloud" class="tag-cloud" aria-label="Popular Instagram hashtags"></div>
         <div id="gallery-grid" class="gallery-grid" aria-live="polite"></div>
       </section>
 
       <section id="contact" class="panel reveal">
-        <h2>Bookings & Collaborations</h2>
-        <p>For campaign inquiries, partnerships, and booking opportunities, contact the Wilson family team.</p>
+        <h2 id="contact-title">Bookings & Collaborations</h2>
+        <p id="contact-copy">For campaign inquiries, partnerships, and booking opportunities, contact the Wilson family team.</p>
         <a class="btn btn-primary" href="mailto:megumegu0214@gmail.com">megumegu0214@gmail.com</a>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>© <span id="year"></span> Sasha Quinn Wilson. All rights reserved.</p>
+      <p id="footer-copy">© <span id="year"></span> Sasha Quinn Wilson. All rights reserved.</p>
     </footer>
 
     <template id="gallery-card-template">
