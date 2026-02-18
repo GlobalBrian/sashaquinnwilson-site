@@ -6,6 +6,7 @@ const heroPhotoFrame = document.querySelector("#hero-photo-frame");
 const heroPhotoCaption = document.querySelector("#hero-photo-caption");
 const langEnBtn = document.querySelector("#lang-en");
 const langJaBtn = document.querySelector("#lang-ja");
+const siteHeader = document.querySelector(".site-header");
 const fallbackHeroSrc = "./content/hero-placeholder.jpg";
 const languageStorageKey = "sqw-language";
 
@@ -444,6 +445,35 @@ function setupLanguageSwitch() {
   langJaBtn.addEventListener("click", () => setLanguage("ja"));
 }
 
+function getAnchorOffset(targetId) {
+  const headerHeight = siteHeader ? siteHeader.getBoundingClientRect().height : 0;
+  const stickyTopGap = 14;
+  const baseOffset = Math.ceil(headerHeight + stickyTopGap);
+  return targetId === "top" ? baseOffset + 8 : baseOffset;
+}
+
+function setupAnchorScrolling() {
+  const anchorLinks = document.querySelectorAll('a[href^="#"]');
+  const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+
+  anchorLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const href = link.getAttribute("href");
+      if (!href || href.length < 2) return;
+
+      const id = href.slice(1);
+      const target = document.getElementById(id);
+      if (!target) return;
+
+      event.preventDefault();
+      const targetTop = target.getBoundingClientRect().top + window.scrollY;
+      const offset = getAnchorOffset(id);
+      window.scrollTo({ top: Math.max(targetTop - offset, 0), behavior });
+      history.replaceState(null, "", `#${id}`);
+    });
+  });
+}
+
 async function loadInstagramData() {
   try {
     const response = await fetch("./content/posts.json", { cache: "no-store" });
@@ -478,5 +508,6 @@ function setupReveal() {
 loadSavedLanguage();
 applyLanguageText();
 setupLanguageSwitch();
+setupAnchorScrolling();
 setupReveal();
 loadInstagramData();
