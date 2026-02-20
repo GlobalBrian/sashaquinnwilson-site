@@ -500,7 +500,7 @@ function renderGallery(posts = []) {
     if (!post.permalink || !post.mediaUrl) return;
 
     const { card, link, image, date, cta, caption } = createGalleryCardShell();
-    if (!card || !link || !image || !date || !cta || !caption || !mount) return;
+    if (!card || !link || !image || !date || !cta || !caption) return;
 
     const variant = getCardVariant(index);
     if (variant) card.classList.add(variant);
