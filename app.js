@@ -131,7 +131,7 @@ const translations = {
         "サーシャ・クイン・ウィルソンは、表情の豊かさと自然体の存在感が魅力のキッズモデル。家族やフォロワーから<strong>Sassy</strong>と呼ばれる、明るく印象に残るキャラクターです。",
       aboutCopy2:
         "日本でのブランド案件を中心に、Nike・Disneyなどグローバルブランドとの取り組みも経験。楽しさと洗練を両立したビジュアルで、着実に実績を広げています。",
-      styleTitle: "Sassy Style DNA",
+      styleTitle: "サッシー・スタイルDNA",
       dnaLabel1: "表現力",
       dnaTitle1: "ぶれない個性",
       dnaCopy1: "視線と表情だけで空気を変える、芯のある表現が得意です。",
@@ -261,6 +261,17 @@ function getStrings() {
 
 function loadSavedLanguage() {
   try {
+    const forced = new URLSearchParams(window.location.search).get("lang");
+    if (forced === "en" || forced === "ja") {
+      currentLanguage = forced;
+      persistLanguage(forced);
+      return;
+    }
+  } catch (_) {
+    // Ignore URL parsing errors.
+  }
+
+  try {
     const stored = localStorage.getItem(languageStorageKey);
     if (stored === "en" || stored === "ja") currentLanguage = stored;
   } catch (_) {
@@ -318,6 +329,19 @@ function formatDate(dateString) {
 
 function cleanCaption(caption = "") {
   return caption.replace(/#[\w_]+/g, "").replace(/\s+/g, " ").trim();
+}
+
+function getCaptionForCurrentLanguage(captionText = "") {
+  const strings = getStrings();
+  const cleaned = cleanCaption(captionText);
+  if (!cleaned) return strings.captionFallback;
+
+  if (currentLanguage === "en") {
+    const latinOnly = cleaned.replace(/[^\x00-\x7F]/g, "").replace(/\s+/g, " ").trim();
+    return latinOnly || strings.captionFallback;
+  }
+
+  return cleaned;
 }
 
 function collectTopTags(posts = []) {
@@ -407,7 +431,7 @@ function renderGallery(posts = []) {
     image.alt = post.caption ? post.caption.slice(0, 120) : "Sasha Quinn Wilson Instagram post";
     date.textContent = formatDate(post.timestamp);
     cta.textContent = strings.galleryCta;
-    caption.textContent = cleanCaption(post.caption) || strings.captionFallback;
+    caption.textContent = getCaptionForCurrentLanguage(post.caption);
 
     grid.appendChild(fragment);
   });
