@@ -81,7 +81,8 @@ function pickExtension(contentType, originalUrl) {
   if (contentType?.includes("image/webp")) return ".webp";
 
   const parsed = new URL(originalUrl);
-  const pathExt = extname(parsed.pathname);
+  const pathExt = extname(parsed.pathname).toLowerCase();
+  if (pathExt === ".heic" || pathExt === ".heif") return ".jpg";
   if (pathExt) return pathExt;
   return ".jpg";
 }
