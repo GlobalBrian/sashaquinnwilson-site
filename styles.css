@@ -680,12 +680,17 @@ h1 span {
 }
 
 .reveal {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body.js-reveal-enabled .reveal {
   opacity: 0;
   transform: translateY(14px);
   transition: opacity 500ms ease, transform 500ms ease;
 }
 
-.reveal.in {
+body.js-reveal-enabled .reveal.in {
   opacity: 1;
   transform: translateY(0);
 }

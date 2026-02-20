@@ -577,6 +577,15 @@ async function loadInstagramData() {
 
 function setupReveal() {
   const targets = document.querySelectorAll(".reveal");
+  if (!targets.length) return;
+
+  if (!("IntersectionObserver" in window)) {
+    targets.forEach((el) => el.classList.add("in"));
+    return;
+  }
+
+  document.body.classList.add("js-reveal-enabled");
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -590,6 +599,11 @@ function setupReveal() {
   );
 
   targets.forEach((el) => observer.observe(el));
+
+  // Safety net for mobile browsers where observers may fail or delay.
+  setTimeout(() => {
+    targets.forEach((el) => el.classList.add("in"));
+  }, 1600);
 }
 
 loadSavedLanguage();
