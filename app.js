@@ -9,6 +9,11 @@ const langJaBtn = document.querySelector("#lang-ja");
 const siteHeader = document.querySelector(".site-header");
 const fallbackHeroSrc = "./content/hero-placeholder.jpg";
 const fallbackGallerySrc = "./content/hero-placeholder.jpg";
+const inlineFallbackImage =
+  "data:image/svg+xml;utf8," +
+  encodeURIComponent(
+    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#182033"/><stop offset="50%" stop-color="#2b3f66"/><stop offset="100%" stop-color="#402942"/></linearGradient></defs><rect width="1200" height="1200" fill="url(#g)"/><circle cx="250" cy="210" r="130" fill="#ffcc77" fill-opacity=".22"/><circle cx="970" cy="980" r="180" fill="#7bc1ff" fill-opacity=".2"/><text x="50%" y="50%" text-anchor="middle" fill="#f4f6fb" font-size="64" font-family="Arial, sans-serif">Sasha Quinn Wilson</text></svg>`
+  );
 const languageStorageKey = "sqw-language";
 
 let currentPosts = [];
@@ -390,11 +395,12 @@ function renderGallery(posts = []) {
     link.href = post.permalink;
     image.src = post.mediaUrl;
     image.onerror = () => {
-      image.onerror = () => {
-        image.closest(".gallery-card")?.remove();
-        if (!grid.children.length) mountEmptyState();
-      };
+      image.onerror = null;
       image.src = fallbackGallerySrc;
+      image.onerror = () => {
+        image.onerror = null;
+        image.src = inlineFallbackImage;
+      };
     };
     image.alt = post.caption ? post.caption.slice(0, 120) : "Sasha Quinn Wilson Instagram post";
     date.textContent = formatDate(post.timestamp);
@@ -420,8 +426,9 @@ function renderHeroPhoto(posts = []) {
       heroPhotoCaption.textContent = strings.heroCaptionPreview;
     };
     heroPhoto.onerror = () => {
-      heroPhoto.removeAttribute("src");
-      heroPhotoFrame.classList.add("is-empty");
+      heroPhoto.onerror = null;
+      heroPhoto.src = inlineFallbackImage;
+      heroPhotoFrame.classList.remove("is-empty");
       heroPhotoCaption.textContent = strings.heroCaptionNoData;
     };
     heroPhoto.src = fallbackHeroSrc;
@@ -437,8 +444,9 @@ function renderHeroPhoto(posts = []) {
       heroPhotoCaption.textContent = strings.heroCaptionNoData;
     };
     heroPhoto.onerror = () => {
-      heroPhoto.removeAttribute("src");
-      heroPhotoFrame.classList.add("is-empty");
+      heroPhoto.onerror = null;
+      heroPhoto.src = inlineFallbackImage;
+      heroPhotoFrame.classList.remove("is-empty");
       heroPhotoCaption.textContent = strings.heroCaptionNoData;
     };
     heroPhoto.src = fallbackHeroSrc;

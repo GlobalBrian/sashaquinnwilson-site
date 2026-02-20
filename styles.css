@@ -573,6 +573,7 @@ h1 span {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 0.75rem;
+  min-height: 120px;
 }
 
 .gallery-card {
