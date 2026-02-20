@@ -381,6 +381,33 @@ function mountEmptyState() {
   grid.appendChild(item);
 }
 
+function renderFallbackGallery() {
+  const strings = getStrings();
+  const fallbackCount = 6;
+
+  for (let i = 0; i < fallbackCount; i += 1) {
+    const fragment = template.content.cloneNode(true);
+    const card = fragment.querySelector(".gallery-card");
+    const link = fragment.querySelector(".gallery-link");
+    const image = fragment.querySelector(".gallery-image");
+    const date = fragment.querySelector(".gallery-date");
+    const cta = fragment.querySelector(".gallery-cta");
+    const caption = fragment.querySelector(".gallery-caption");
+
+    if (i % 2 === 0) card.classList.add("tone-pop");
+    else card.classList.add("tone-minimal");
+
+    link.href = "https://www.instagram.com/sassyy_quinnnn";
+    image.src = fallbackGallerySrc;
+    image.alt = "Sasha Quinn Wilson featured image";
+    date.textContent = currentLanguage === "ja" ? "最新" : "Latest";
+    cta.textContent = strings.galleryCta;
+    caption.textContent = strings.captionFallback;
+
+    grid.appendChild(fragment);
+  }
+}
+
 function getCardVariant(index) {
   if (index % 7 === 3) return "wide";
   if (index % 5 === 2) return "tall";
@@ -399,6 +426,7 @@ function renderGallery(posts = []) {
   const strings = getStrings();
 
   if (!Array.isArray(posts) || posts.length === 0) {
+    renderFallbackGallery();
     mountEmptyState();
     return;
   }
@@ -436,7 +464,10 @@ function renderGallery(posts = []) {
     grid.appendChild(fragment);
   });
 
-  if (!grid.children.length) mountEmptyState();
+  if (!grid.children.length) {
+    renderFallbackGallery();
+    mountEmptyState();
+  }
 }
 
 function renderHeroPhoto(posts = []) {
