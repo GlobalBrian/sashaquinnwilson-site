@@ -1,5 +1,5 @@
 import { mkdir, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { extname, resolve } from "node:path";
 
 const accessToken = (process.env.IG_ACCESS_TOKEN || "").trim();
 const userId = process.env.IG_USER_ID;
@@ -61,10 +61,11 @@ async function fetchPosts() {
 
 async function main() {
   const posts = await fetchPosts();
+  const hydratedPosts = await mirrorMediaLocally(posts);
   const out = {
     updatedAt: new Date().toISOString(),
     source: "instagram_graph_api",
-    posts
+    posts: hydratedPosts
   };
 
   const outputDir = resolve(process.cwd(), "content");
@@ -72,6 +73,49 @@ async function main() {
   await writeFile(resolve(outputDir, "posts.json"), `${JSON.stringify(out, null, 2)}\n`, "utf8");
 
   console.log(`Saved ${posts.length} posts to content/posts.json`);
+}
+
+function pickExtension(contentType, originalUrl) {
+  if (contentType?.includes("image/jpeg")) return ".jpg";
+  if (contentType?.includes("image/png")) return ".png";
+  if (contentType?.includes("image/webp")) return ".webp";
+
+  const parsed = new URL(originalUrl);
+  const pathExt = extname(parsed.pathname);
+  if (pathExt) return pathExt;
+  return ".jpg";
+}
+
+async function mirrorMediaLocally(posts) {
+  const mediaDir = resolve(process.cwd(), "content", "ig");
+  await mkdir(mediaDir, { recursive: true });
+
+  const mirrored = await Promise.all(
+    posts.map(async (post) => {
+      if (!post.mediaUrl) return post;
+
+      try {
+        const response = await fetch(post.mediaUrl);
+        if (!response.ok) return post;
+
+        const contentType = response.headers.get("content-type") || "";
+        const fileExt = pickExtension(contentType, post.mediaUrl);
+        const fileName = `${post.id}${fileExt}`;
+        const filePath = resolve(mediaDir, fileName);
+        const buffer = Buffer.from(await response.arrayBuffer());
+        await writeFile(filePath, buffer);
+
+        return {
+          ...post,
+          mediaUrl: `./content/ig/${fileName}`
+        };
+      } catch {
+        return post;
+      }
+    })
+  );
+
+  return mirrored;
 }
 
 main().catch((error) => {

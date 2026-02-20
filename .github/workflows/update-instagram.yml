@@ -33,6 +33,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add content/posts.json
+          if [ -d content/ig ]; then
+            git add content/ig
+          fi
           if git diff --cached --quiet; then
             echo "No gallery updates"
             exit 0
