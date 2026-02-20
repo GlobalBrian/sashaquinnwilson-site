@@ -8,6 +8,7 @@ const langEnBtn = document.querySelector("#lang-en");
 const langJaBtn = document.querySelector("#lang-ja");
 const siteHeader = document.querySelector(".site-header");
 const fallbackHeroSrc = "./content/hero-placeholder.jpg";
+const fallbackGallerySrc = "./content/hero-placeholder.jpg";
 const languageStorageKey = "sqw-language";
 
 let currentPosts = [];
@@ -19,9 +20,9 @@ const translations = {
     description:
       "Official portfolio for Sasha Quinn Wilson (Sassy) - model portfolio, featured collaborations, and latest campaign work.",
     strings: {
-      navAbout: "About",
-      navStyle: "Style",
-      navPersonality: "Personality",
+      navAbout: "プロフィール",
+      navStyle: "スタイル",
+      navPersonality: "人柄",
       navGallery: "Gallery",
       navContact: "Contact",
       heroKicker: "Official Model Portfolio",
@@ -30,12 +31,12 @@ const translations = {
         "Big personality. Sharp camera instincts. Global-ready energy. Sasha brings playful edge and polished confidence to every frame.",
       heroCtaInstagram: "View Instagram",
       heroCtaWork: "See Latest Work",
-      tone1: "Studio Minimal",
+      tone1: "スタジオミニマル",
       tone2: "Playful Pop",
-      tone3: "Editorial Red",
-      spotGlobalTitle: "Global Reach",
+      tone3: "エディトリアルレッド",
+      spotGlobalTitle: "グローバル実績",
       spotGlobalCopy: "Campaign collaborations in Japan + international brand visibility.",
-      spotFitTitle: "Brand Fit",
+      spotFitTitle: "ブランド適性",
       spotFitCopy: "Lifestyle, fashion, family, sport, and character-led creative shoots.",
       spotSticker: "from day one",
       aboutTitle: "About Sasha",
@@ -99,83 +100,83 @@ const translations = {
   ja: {
     title: "サーシャ・クイン・ウィルソン | 公式ポートフォリオ",
     description:
-      "サーシャ・クイン・ウィルソン（Sassy）の公式ポートフォリオ。最新のモデルワーク、ブランド実績、キャンペーンを紹介。",
+      "サーシャ・クイン・ウィルソン（Sassy）公式サイト。最新のモデル実績、ブランドコラボ、出演情報を掲載しています。",
     strings: {
-      navAbout: "プロフィール",
-      navStyle: "表現スタイル",
-      navPersonality: "人柄",
+      navAbout: "About",
+      navStyle: "Style",
+      navPersonality: "Personality",
       navGallery: "ギャラリー",
       navContact: "お問い合わせ",
-      heroKicker: "Official Portfolio",
-      heroSubtitle: "ニックネーム: Sassy",
+      heroKicker: "Official Model Portfolio",
+      heroSubtitle: "愛称：Sassy",
       heroLead:
-        "豊かな個性と自然なカメラセンス、そして国際的な現場にも馴染む存在感。サーシャは、遊び心と品のある魅力を一枚一枚に映し出します。",
+        "豊かな表情、自然なカメラ感覚、そして世界観を瞬時に掴む対応力。サーシャは、遊び心と品のある存在感を一枚一枚に残します。",
       heroCtaInstagram: "Instagramを見る",
-      heroCtaWork: "最新ワークを見る",
-      tone1: "ミニマル&クリーン",
+      heroCtaWork: "最新の出演を見る",
+      tone1: "Studio Minimal",
       tone2: "プレイフルポップ",
-      tone3: "エディトリアルレッド",
-      spotGlobalTitle: "グローバル実績",
-      spotGlobalCopy: "日本でのブランド案件を中心に、海外を含む実績も広がっています。",
-      spotFitTitle: "起用しやすさ",
-      spotFitCopy: "ライフスタイル、ファッション、ファミリー、スポーツ系まで幅広く対応可能です。",
-      spotSticker: "生まれた時から Sassy",
+      tone3: "Editorial Red",
+      spotGlobalTitle: "Global Reach",
+      spotGlobalCopy: "日本での案件を軸に、グローバルブランドとの実績も積み重ねています。",
+      spotFitTitle: "Brand Fit",
+      spotFitCopy: "ライフスタイル、ファッション、ファミリー、スポーツなど幅広い表現に対応できます。",
+      spotSticker: "生まれた日からSassy",
       aboutTitle: "サーシャについて",
       aboutCopy1:
-        "サーシャ・クイン・ウィルソンの魅力は、自然な表現力と自信に満ちた空気感、そして人を惹きつける明るさ。家族やフォロワーが<strong>Sassy</strong>と呼ぶのも納得です。",
+        "サーシャ・クイン・ウィルソンは、表情の豊かさと自然体の存在感が魅力のキッズモデル。家族やフォロワーから<strong>Sassy</strong>と呼ばれる、明るく印象に残るキャラクターです。",
       aboutCopy2:
-        "日本でのブランド案件に加え、NikeやDisneyなどグローバルブランドでの実績も重ねており、楽しさ・個性・プロとしての安定感を兼ね備えたポートフォリオを築いています。",
-      styleTitle: "Sassy Style",
+        "日本でのブランド案件を中心に、Nike・Disneyなどグローバルブランドとの取り組みも経験。楽しさと洗練を両立したビジュアルで、着実に実績を広げています。",
+      styleTitle: "Sassy Style DNA",
       dnaLabel1: "表現力",
       dnaTitle1: "ぶれない個性",
-      dnaCopy1: "遊び心と自信を活かし、印象に残る表情をつくるのが得意です。",
+      dnaCopy1: "視線と表情だけで空気を変える、芯のある表現が得意です。",
       dnaLabel2: "動き",
       dnaTitle2: "自然なポージング",
-      dnaCopy2: "エディトリアルからライフスタイルまで、切り替えもスムーズに対応。",
+      dnaCopy2: "エディトリアルの静けさから、ライフスタイルの動きまでスムーズに切り替えます。",
       dnaLabel3: "存在感",
-      dnaTitle3: "カメラを引き寄せる魅力",
-      dnaCopy3: "上品で今っぽく、記憶に残るビジュアルづくりに強みがあります。",
+      dnaTitle3: "カメラを惹きつける力",
+      dnaCopy3: "一度見たら記憶に残るビジュアルを、安定して作れるのが強みです。",
       looksTitle: "シグネチャールック",
       lookTitle1: "スタジオミニマル",
-      lookCopy1: "アイボリーやペールトーンを活かした、上品でクリーンな世界観。",
+      lookCopy1: "アイボリーや淡色トーンを活かした、上品でクリーンな世界観。",
       lookTitle2: "プレイフルポップ",
-      lookCopy2: "鮮やかな色彩と明るい空気感で、キッズ向け企画との相性が抜群。",
+      lookCopy2: "鮮やかなカラーと明るい空気感で、キッズ案件と高い親和性を発揮。",
       lookTitle3: "エディトリアル",
-      lookCopy3: "コントラストを効かせたスタイリングで、ファッション性をしっかり表現します。",
+      lookCopy3: "コントラストの効いたスタイリングで、ファッション性の高い表現に対応。",
       personalityTitle: "オフカメラ",
       personalityIntro:
-        "撮影以外でも、サーシャは明るさと自信にあふれ、周囲を自然に笑顔にします。現場でも打ち解けやすく、記憶に残る存在です。",
+        "撮影外でも、サーシャは周囲を明るくする存在。現場になじむ早さと、自然なコミュニケーション力も大きな魅力です。",
       hobbyTitle: "趣味",
       hobby1: "ダンス練習",
-      hobby2: "新しい振り付けを覚えること",
-      hobby3: "ごっこ遊び",
-      hobby4: "家族の前で踊ること",
+      hobby2: "新しいステップを覚えること",
+      hobby3: "創作あそび",
+      hobby4: "家族にダンスを見せること",
       likesTitle: "好きなこと",
       like1: "ダンス",
       like2: "スイーツ",
       like3: "オクラ",
       like4: "たまごが大好き",
-      like5: "人を笑顔にすること",
+      like5: "みんなを笑わせること",
       like6: "家族との時間",
       like7: "お兄ちゃんと遊ぶこと",
       notesTitle: "性格・特徴",
-      note1: "自立心が強い",
-      note2: "人なつっこく社交的",
-      note3: "チャレンジを怖がらない",
-      note4: "細かく縛られるより、自由度のある環境で力を発揮",
-      note5: "おもちゃの片付けはちょっと苦手",
+      note1: "自立心がある",
+      note2: "社交的で人懐っこい",
+      note3: "チャレンジを楽しめる",
+      note4: "細かな指示より、自由度のある環境で力を発揮",
+      note5: "おもちゃの片づけは少し苦手",
       galleryTitle: "最新Instagramルックブック",
-      galleryNote: "Instagramと連携し、最新投稿を自動で反映しています。",
+      galleryNote: "Instagramの投稿を自動反映し、常に最新の出演実績を掲載しています。",
       contactTitle: "ご依頼・コラボレーション",
-      contactCopy: "キャンペーン出演、タイアップ、撮影のご相談は、ご家族チームまでお気軽にご連絡ください。",
-      footerCopy: "© {{year}} Sasha Quinn Wilson. 無断転載を禁じます。",
+      contactCopy: "キャンペーン出演・タイアップ・撮影のご相談は、ご家族チームまでお気軽にご連絡ください。",
+      footerCopy: "© {{year}} Sasha Quinn Wilson. All rights reserved.",
       galleryCta: "投稿を見る",
-      galleryEmpty: "ギャラリーを更新中です。最新の投稿はまもなく表示されます。",
-      captionFallback: "Instagramで続きを見る",
-      heroCaptionLatest: "Instagramの最新投稿より",
-      heroCaptionPreview: "注目ポートレート（プレビュー）",
-      heroCaptionAddPlaceholder: "content/hero-placeholder.jpg を配置すると、先にヒーロー画像を確認できます。",
-      heroCaptionNoData: "Instagram連携後、ここに注目ポートレートが表示されます。"
+      galleryEmpty: "現在ギャラリーを更新中です。最新投稿はまもなく反映されます。",
+      captionFallback: "Instagramで投稿を見る",
+      heroCaptionLatest: "Instagram最新投稿からの注目カット",
+      heroCaptionPreview: "注目ビジュアル（プレビュー）",
+      heroCaptionAddPlaceholder: "Instagram未接続時は、設定したストック画像を表示しています。",
+      heroCaptionNoData: "Instagram投稿が取得できないため、現在はストック画像を表示しています。"
     }
   }
 };
@@ -388,6 +389,13 @@ function renderGallery(posts = []) {
 
     link.href = post.permalink;
     image.src = post.mediaUrl;
+    image.onerror = () => {
+      image.onerror = () => {
+        image.closest(".gallery-card")?.remove();
+        if (!grid.children.length) mountEmptyState();
+      };
+      image.src = fallbackGallerySrc;
+    };
     image.alt = post.caption ? post.caption.slice(0, 120) : "Sasha Quinn Wilson Instagram post";
     date.textContent = formatDate(post.timestamp);
     cta.textContent = strings.galleryCta;
@@ -420,9 +428,23 @@ function renderHeroPhoto(posts = []) {
     return;
   }
 
-  heroPhoto.src = featured.mediaUrl;
-  heroPhotoFrame.classList.remove("is-empty");
+  heroPhoto.onload = () => {
+    heroPhotoFrame.classList.remove("is-empty");
+  };
+  heroPhoto.onerror = () => {
+    heroPhoto.onload = () => {
+      heroPhotoFrame.classList.remove("is-empty");
+      heroPhotoCaption.textContent = strings.heroCaptionNoData;
+    };
+    heroPhoto.onerror = () => {
+      heroPhoto.removeAttribute("src");
+      heroPhotoFrame.classList.add("is-empty");
+      heroPhotoCaption.textContent = strings.heroCaptionNoData;
+    };
+    heroPhoto.src = fallbackHeroSrc;
+  };
   heroPhotoCaption.textContent = cleanCaption(featured.caption) || strings.heroCaptionLatest;
+  heroPhoto.src = featured.mediaUrl;
 }
 
 function rerenderLocalizedDynamicParts() {
