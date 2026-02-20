@@ -25,9 +25,9 @@ const translations = {
     description:
       "Official portfolio for Sasha Quinn Wilson (Sassy) - model portfolio, featured collaborations, and latest campaign work.",
     strings: {
-      navAbout: "プロフィール",
-      navStyle: "スタイル",
-      navPersonality: "人柄",
+      navAbout: "About",
+      navStyle: "Style",
+      navPersonality: "Personality",
       navGallery: "Gallery",
       navContact: "Contact",
       heroKicker: "Official Model Portfolio",
@@ -36,12 +36,12 @@ const translations = {
         "Big personality. Sharp camera instincts. Global-ready energy. Sasha brings playful edge and polished confidence to every frame.",
       heroCtaInstagram: "View Instagram",
       heroCtaWork: "See Latest Work",
-      tone1: "スタジオミニマル",
+      tone1: "Studio Minimal",
       tone2: "Playful Pop",
-      tone3: "エディトリアルレッド",
-      spotGlobalTitle: "グローバル実績",
+      tone3: "Editorial Red",
+      spotGlobalTitle: "Global Reach",
       spotGlobalCopy: "Campaign collaborations in Japan + international brand visibility.",
-      spotFitTitle: "ブランド適性",
+      spotFitTitle: "Brand Fit",
       spotFitCopy: "Lifestyle, fashion, family, sport, and character-led creative shoots.",
       spotSticker: "from day one",
       aboutTitle: "About Sasha",
@@ -107,23 +107,23 @@ const translations = {
     description:
       "サーシャ・クイン・ウィルソン（Sassy）公式サイト。最新のモデル実績、ブランドコラボ、出演情報を掲載しています。",
     strings: {
-      navAbout: "About",
-      navStyle: "Style",
-      navPersonality: "Personality",
+      navAbout: "プロフィール",
+      navStyle: "スタイル",
+      navPersonality: "人柄",
       navGallery: "ギャラリー",
       navContact: "お問い合わせ",
-      heroKicker: "Official Model Portfolio",
+      heroKicker: "公式モデルポートフォリオ",
       heroSubtitle: "愛称：Sassy",
       heroLead:
         "豊かな表情、自然なカメラ感覚、そして世界観を瞬時に掴む対応力。サーシャは、遊び心と品のある存在感を一枚一枚に残します。",
       heroCtaInstagram: "Instagramを見る",
       heroCtaWork: "最新の出演を見る",
-      tone1: "Studio Minimal",
+      tone1: "スタジオミニマル",
       tone2: "プレイフルポップ",
-      tone3: "Editorial Red",
-      spotGlobalTitle: "Global Reach",
+      tone3: "エディトリアルレッド",
+      spotGlobalTitle: "グローバル実績",
       spotGlobalCopy: "日本での案件を軸に、グローバルブランドとの実績も積み重ねています。",
-      spotFitTitle: "Brand Fit",
+      spotFitTitle: "ブランド適性",
       spotFitCopy: "ライフスタイル、ファッション、ファミリー、スポーツなど幅広い表現に対応できます。",
       spotSticker: "生まれた日からSassy",
       aboutTitle: "サーシャについて",
@@ -254,7 +254,9 @@ const textTargets = {
 };
 
 function getStrings() {
-  return translations[currentLanguage]?.strings || translations.en.strings;
+  const enStrings = translations.en.strings;
+  const selectedStrings = translations[currentLanguage]?.strings || {};
+  return { ...enStrings, ...selectedStrings };
 }
 
 function loadSavedLanguage() {
