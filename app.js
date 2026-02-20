@@ -384,18 +384,15 @@ function mountEmptyState() {
 function renderFallbackGallery() {
   const strings = getStrings();
   const fallbackCount = 6;
+  const previousChildren = grid.children.length;
 
   for (let i = 0; i < fallbackCount; i += 1) {
-    const fragment = template.content.cloneNode(true);
-    const card = fragment.querySelector(".gallery-card");
-    const link = fragment.querySelector(".gallery-link");
-    const image = fragment.querySelector(".gallery-image");
-    const date = fragment.querySelector(".gallery-date");
-    const cta = fragment.querySelector(".gallery-cta");
-    const caption = fragment.querySelector(".gallery-caption");
+    const { card, link, image, date, cta, caption, mount } = createGalleryCardShell();
+    if (!card || !link || !image || !date || !cta || !caption || !mount) continue;
 
     if (i % 2 === 0) card.classList.add("tone-pop");
     else card.classList.add("tone-minimal");
+    card.classList.add("fallback-card");
 
     link.href = "https://www.instagram.com/sassyy_quinnnn";
     image.src = fallbackGallerySrc;
@@ -404,14 +401,77 @@ function renderFallbackGallery() {
     cta.textContent = strings.galleryCta;
     caption.textContent = strings.captionFallback;
 
-    grid.appendChild(fragment);
+    mount();
   }
+
+  return previousChildren !== grid.children.length;
+}
+
+function ensureGalleryVisible() {
+  if (!grid) return;
+  if (grid.children.length > 0) return;
+  renderFallbackGallery();
 }
 
 function getCardVariant(index) {
   if (index % 7 === 3) return "wide";
   if (index % 5 === 2) return "tall";
   return "";
+}
+
+function createGalleryCardShell() {
+  if (template?.content) {
+    const fragment = template.content.cloneNode(true);
+    const card = fragment.querySelector(".gallery-card");
+    const link = fragment.querySelector(".gallery-link");
+    const image = fragment.querySelector(".gallery-image");
+    const date = fragment.querySelector(".gallery-date");
+    const cta = fragment.querySelector(".gallery-cta");
+    const caption = fragment.querySelector(".gallery-caption");
+    return {
+      card,
+      link,
+      image,
+      date,
+      cta,
+      caption,
+      mount: () => grid.appendChild(fragment)
+    };
+  }
+
+  const card = document.createElement("article");
+  card.className = "gallery-card";
+  const link = document.createElement("a");
+  link.className = "gallery-link";
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  const image = document.createElement("img");
+  image.className = "gallery-image";
+  image.loading = "lazy";
+  const overlay = document.createElement("div");
+  overlay.className = "gallery-overlay";
+  const date = document.createElement("span");
+  date.className = "gallery-date";
+  const cta = document.createElement("span");
+  cta.className = "gallery-cta";
+  overlay.append(date, cta);
+  const meta = document.createElement("div");
+  meta.className = "gallery-meta";
+  const caption = document.createElement("p");
+  caption.className = "gallery-caption";
+  meta.appendChild(caption);
+  link.append(image, overlay, meta);
+  card.appendChild(link);
+
+  return {
+    card,
+    link,
+    image,
+    date,
+    cta,
+    caption,
+    mount: () => grid.appendChild(card)
+  };
 }
 
 function getToneClass(post = {}) {
@@ -422,25 +482,25 @@ function getToneClass(post = {}) {
 }
 
 function renderGallery(posts = []) {
-  grid.innerHTML = "";
+  if (!grid) return;
   const strings = getStrings();
 
   if (!Array.isArray(posts) || posts.length === 0) {
-    renderFallbackGallery();
-    mountEmptyState();
+    if (!grid.children.length) {
+      renderFallbackGallery();
+      mountEmptyState();
+    }
     return;
   }
+
+  const fragment = document.createDocumentFragment();
+  let addedCards = 0;
 
   posts.forEach((post, index) => {
     if (!post.permalink || !post.mediaUrl) return;
 
-    const fragment = template.content.cloneNode(true);
-    const card = fragment.querySelector(".gallery-card");
-    const link = fragment.querySelector(".gallery-link");
-    const image = fragment.querySelector(".gallery-image");
-    const date = fragment.querySelector(".gallery-date");
-    const cta = fragment.querySelector(".gallery-cta");
-    const caption = fragment.querySelector(".gallery-caption");
+    const { card, link, image, date, cta, caption } = createGalleryCardShell();
+    if (!card || !link || !image || !date || !cta || !caption || !mount) return;
 
     const variant = getCardVariant(index);
     if (variant) card.classList.add(variant);
@@ -461,13 +521,17 @@ function renderGallery(posts = []) {
     cta.textContent = strings.galleryCta;
     caption.textContent = getCaptionForCurrentLanguage(post.caption);
 
-    grid.appendChild(fragment);
+    fragment.appendChild(card);
+    addedCards += 1;
   });
 
-  if (!grid.children.length) {
+  if (!addedCards) {
     renderFallbackGallery();
     mountEmptyState();
+    return;
   }
+
+  grid.replaceChildren(fragment);
 }
 
 function renderHeroPhoto(posts = []) {
@@ -576,38 +640,12 @@ async function loadInstagramData() {
 }
 
 function setupReveal() {
-  const targets = document.querySelectorAll(".reveal");
-  if (!targets.length) return;
-
-  if (!("IntersectionObserver" in window)) {
-    targets.forEach((el) => el.classList.add("in"));
-    return;
-  }
-
-  document.body.classList.add("js-reveal-enabled");
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("in");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.14 }
-  );
-
-  targets.forEach((el) => observer.observe(el));
-
-  // Safety net for mobile browsers where observers may fail or delay.
-  setTimeout(() => {
-    targets.forEach((el) => el.classList.add("in"));
-  }, 1600);
+  document.querySelectorAll(".reveal").forEach((el) => el.classList.add("in"));
 }
 
 loadSavedLanguage();
 applyLanguageText();
+ensureGalleryVisible();
 setupLanguageSwitch();
 setupAnchorScrolling();
 setupReveal();
