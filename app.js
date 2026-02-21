@@ -19,6 +19,19 @@ const languageStorageKey = "sqw-language";
 let currentPosts = [];
 let currentLanguage = "en";
 
+function applyThemePreviewFromQuery() {
+  try {
+    const theme = new URLSearchParams(window.location.search).get("theme");
+    if (theme === "bright") {
+      document.documentElement.setAttribute("data-theme", "bright");
+    } else {
+      document.documentElement.removeAttribute("data-theme");
+    }
+  } catch (_) {
+    document.documentElement.removeAttribute("data-theme");
+  }
+}
+
 const translations = {
   en: {
     title: "Sasha Quinn Wilson | Official Portfolio",
@@ -644,6 +657,7 @@ function setupReveal() {
 }
 
 loadSavedLanguage();
+applyThemePreviewFromQuery();
 applyLanguageText();
 ensureGalleryVisible();
 setupLanguageSwitch();

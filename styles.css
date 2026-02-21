@@ -21,6 +21,12 @@
   --top-anchor-offset: 7.4rem;
 }
 
+html[data-theme="bright"] {
+  --muted: #e7e2d5;
+  --line: rgba(255, 255, 255, 0.32);
+  --glass: rgba(13, 18, 30, 0.4);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -40,6 +46,10 @@ body {
   overflow-x: hidden;
 }
 
+html[data-theme="bright"] body {
+  background: linear-gradient(145deg, #13203a 0%, #1e3358 48%, #28426a 100%);
+}
+
 .backdrop {
   position: fixed;
   inset: -15%;
@@ -51,6 +61,14 @@ body {
     radial-gradient(circle at 22% 70%, rgba(255, 213, 93, 0.2), transparent 34%);
   filter: blur(6px);
   animation: hueShift 16s ease-in-out infinite alternate;
+}
+
+html[data-theme="bright"] .backdrop {
+  background:
+    radial-gradient(circle at 10% 18%, rgba(255, 156, 118, 0.36), transparent 34%),
+    radial-gradient(circle at 86% 14%, rgba(132, 227, 218, 0.34), transparent 30%),
+    radial-gradient(circle at 78% 78%, rgba(138, 201, 255, 0.34), transparent 36%),
+    radial-gradient(circle at 22% 70%, rgba(255, 225, 126, 0.3), transparent 34%);
 }
 
 .grain {
