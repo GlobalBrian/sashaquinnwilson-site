@@ -29,16 +29,16 @@
 
 html[data-theme="light"] {
   --text: #18253f;
-  --muted: #445777;
-  --line: rgba(38, 64, 102, 0.22);
-  --glass: rgba(255, 255, 255, 0.74);
+  --muted: #3f5372;
+  --line: rgba(38, 64, 102, 0.26);
+  --glass: rgba(241, 246, 255, 0.72);
   --shadow: 0 18px 38px rgba(31, 48, 77, 0.14);
-  --header-bg: rgba(255, 255, 255, 0.82);
-  --card-bg: #f8fbff;
+  --header-bg: rgba(241, 247, 255, 0.78);
+  --card-bg: #edf3fb;
   --caption-text: #1f2f4a;
-  --caption-bg: rgba(255, 255, 255, 0.9);
-  --footer-text: #5b6b89;
-  --tag-bg: rgba(24, 37, 63, 0.05);
+  --caption-bg: rgba(241, 247, 255, 0.88);
+  --footer-text: #4f607e;
+  --tag-bg: rgba(24, 37, 63, 0.09);
 }
 
 * {
@@ -61,7 +61,7 @@ body {
 }
 
 html[data-theme="light"] body {
-  background: linear-gradient(145deg, #edf3ff 0%, #e3f0ff 52%, #f8f4ff 100%);
+  background: linear-gradient(145deg, #d9e5fb 0%, #d2e0f8 52%, #ebe5f8 100%);
 }
 
 .backdrop {
@@ -780,11 +780,11 @@ html[data-theme="light"] nav a:hover {
 }
 
 html[data-theme="light"] .lang-switch {
-  background: rgba(24, 37, 63, 0.06);
+  background: rgba(24, 37, 63, 0.09);
 }
 
 html[data-theme="light"] .theme-switch {
-  background: rgba(24, 37, 63, 0.06);
+  background: rgba(24, 37, 63, 0.09);
 }
 
 html[data-theme="light"] .lang-btn.is-active {
@@ -798,11 +798,11 @@ html[data-theme="light"] .theme-btn.is-active {
 }
 
 html[data-theme="light"] .btn-ghost {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(241, 247, 255, 0.52);
 }
 
 html[data-theme="light"] .spot-card {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(241, 247, 255, 0.52);
 }
 
 html[data-theme="light"] .spot-card h2 {
@@ -814,7 +814,7 @@ html[data-theme="light"] .spot-card p {
 }
 
 html[data-theme="light"] #about {
-  background: linear-gradient(140deg, rgba(255, 255, 255, 0.68), rgba(205, 231, 255, 0.58), rgba(236, 242, 255, 0.5));
+  background: linear-gradient(140deg, rgba(226, 236, 251, 0.64), rgba(191, 220, 250, 0.56), rgba(217, 230, 248, 0.5));
 }
 
 html[data-theme="light"] #about h2 {
@@ -826,7 +826,7 @@ html[data-theme="light"] #about p {
 }
 
 html[data-theme="light"] #style {
-  background: linear-gradient(140deg, rgba(255, 228, 214, 0.58), rgba(255, 241, 203, 0.56), rgba(255, 255, 255, 0.5));
+  background: linear-gradient(140deg, rgba(244, 219, 201, 0.52), rgba(245, 231, 188, 0.48), rgba(226, 236, 251, 0.46));
 }
 
 html[data-theme="light"] #style h2 {
@@ -835,7 +835,7 @@ html[data-theme="light"] #style h2 {
 
 html[data-theme="light"] .dna-card {
   border-color: rgba(186, 139, 80, 0.35);
-  background: rgba(255, 255, 255, 0.66);
+  background: rgba(237, 245, 255, 0.58);
 }
 
 html[data-theme="light"] .dna-label {
@@ -851,7 +851,7 @@ html[data-theme="light"] .dna-card p {
 }
 
 html[data-theme="light"] #personality {
-  background: linear-gradient(140deg, rgba(255, 223, 234, 0.56), rgba(219, 242, 255, 0.56), rgba(255, 255, 255, 0.52));
+  background: linear-gradient(140deg, rgba(245, 213, 226, 0.5), rgba(203, 233, 250, 0.48), rgba(227, 238, 252, 0.46));
 }
 
 html[data-theme="light"] #personality h2 {
@@ -864,7 +864,7 @@ html[data-theme="light"] #personality > p {
 
 html[data-theme="light"] .personality-card {
   border-color: rgba(210, 135, 167, 0.36);
-  background: rgba(255, 255, 255, 0.66);
+  background: rgba(237, 245, 255, 0.58);
 }
 
 html[data-theme="light"] .personality-card h3 {
@@ -882,7 +882,7 @@ html[data-theme="light"] .section-head a {
 }
 
 html[data-theme="light"] .gallery-meta {
-  background: linear-gradient(180deg, rgba(44, 71, 109, 0.02), rgba(44, 71, 109, 0.08));
+  background: linear-gradient(180deg, rgba(44, 71, 109, 0.04), rgba(44, 71, 109, 0.12));
 }
 
 html[data-theme="light"] .gallery-caption {
