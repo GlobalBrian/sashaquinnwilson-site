@@ -369,19 +369,39 @@ h1 span {
 
 .sticker-card p {
   color: #131313;
-  font-family: "Abril Fatface", serif;
+  font-family: "Outfit", sans-serif;
   font-size: 1.55rem;
   margin: 0;
   line-height: 0.95;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.22rem;
+}
+
+.sticker-main {
+  display: inline-block;
+  font-family: "Abril Fatface", serif;
+  font-size: 1.55rem;
+  line-height: 0.92;
+  font-weight: 400;
+  background: rgba(210, 225, 255, 0.85);
+  color: #151515;
+  padding: 0.08rem 0.24rem 0.12rem;
+  border-radius: 2px;
 }
 
 .sticker-card span {
-  display: block;
+  display: inline-block;
   font-family: "Outfit", sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.11em;
   font-size: 0.75rem;
-  margin-top: 0.4rem;
+  margin-top: 0;
+  background: rgba(210, 225, 255, 0.85);
+  color: #151515;
+  padding: 0.1rem 0.28rem;
+  border-radius: 2px;
 }
 
 .panel {
