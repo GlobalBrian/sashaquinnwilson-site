@@ -6,6 +6,8 @@ const heroPhotoFrame = document.querySelector("#hero-photo-frame");
 const heroPhotoCaption = document.querySelector("#hero-photo-caption");
 const langEnBtn = document.querySelector("#lang-en");
 const langJaBtn = document.querySelector("#lang-ja");
+const themeDarkBtn = document.querySelector("#theme-dark");
+const themeLightBtn = document.querySelector("#theme-light");
 const siteHeader = document.querySelector(".site-header");
 const fallbackHeroSrc = "./content/hero-placeholder.jpg";
 const fallbackGallerySrc = "./content/hero-placeholder.jpg";
@@ -15,14 +17,17 @@ const inlineFallbackImage =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#182033"/><stop offset="50%" stop-color="#2b3f66"/><stop offset="100%" stop-color="#402942"/></linearGradient></defs><rect width="1200" height="1200" fill="url(#g)"/><circle cx="250" cy="210" r="130" fill="#ffcc77" fill-opacity=".22"/><circle cx="970" cy="980" r="180" fill="#7bc1ff" fill-opacity=".2"/><text x="50%" y="50%" text-anchor="middle" fill="#f4f6fb" font-size="64" font-family="Arial, sans-serif">Sasha Quinn Wilson</text></svg>`
   );
 const languageStorageKey = "sqw-language";
+const themeStorageKey = "sqw-theme";
 
 let currentPosts = [];
 let currentLanguage = "en";
 let forcedTheme = null;
+let userThemeOverride = null;
 
 function setTheme(theme) {
   if (!["dark", "light"].includes(theme)) return;
   document.documentElement.setAttribute("data-theme", theme);
+  updateThemeButtons();
 }
 
 function applyThemeFromPreferences() {
@@ -38,6 +43,11 @@ function applyThemeFromPreferences() {
   }
 
   forcedTheme = null;
+  if (userThemeOverride) {
+    setTheme(userThemeOverride);
+    return;
+  }
+
   const prefersLight =
     typeof window !== "undefined" &&
     typeof window.matchMedia === "function" &&
@@ -49,7 +59,7 @@ function watchThemePreferenceChanges() {
   if (typeof window.matchMedia !== "function") return;
   const media = window.matchMedia("(prefers-color-scheme: light)");
   const onChange = (event) => {
-    if (forcedTheme) return;
+    if (forcedTheme || userThemeOverride) return;
     setTheme(event.matches ? "light" : "dark");
   };
 
@@ -57,6 +67,40 @@ function watchThemePreferenceChanges() {
     media.addEventListener("change", onChange);
   } else if (typeof media.addListener === "function") {
     media.addListener(onChange);
+  }
+}
+
+function loadSavedThemeOverride() {
+  try {
+    const stored = localStorage.getItem(themeStorageKey);
+    if (stored === "dark" || stored === "light") userThemeOverride = stored;
+  } catch (_) {
+    userThemeOverride = null;
+  }
+}
+
+function persistThemeOverride(theme) {
+  try {
+    if (theme === "dark" || theme === "light") {
+      localStorage.setItem(themeStorageKey, theme);
+    } else {
+      localStorage.removeItem(themeStorageKey);
+    }
+  } catch (_) {
+    // Ignore storage failures.
+  }
+}
+
+function clearThemeQueryParam() {
+  try {
+    const url = new URL(window.location.href);
+    if (!url.searchParams.has("theme")) return;
+    url.searchParams.delete("theme");
+    const search = url.searchParams.toString();
+    const next = `${url.pathname}${search ? `?${search}` : ""}${url.hash}`;
+    history.replaceState(null, "", next);
+  } catch (_) {
+    // Ignore URL/history failures.
   }
 }
 
@@ -71,6 +115,8 @@ const translations = {
       navPersonality: "Personality",
       navGallery: "Gallery",
       navContact: "Contact",
+      themeDark: "Dark",
+      themeLight: "Light",
       heroKicker: "Official Model Portfolio",
       heroSubtitle: "aka Sassy",
       heroLead:
@@ -153,6 +199,8 @@ const translations = {
       navPersonality: "人柄",
       navGallery: "ギャラリー",
       navContact: "お問い合わせ",
+      themeDark: "ダーク",
+      themeLight: "ライト",
       heroKicker: "公式モデルサイト",
       heroSubtitle: "愛称：Sassy",
       heroLead:
@@ -233,6 +281,8 @@ const textTargets = {
   navPersonality: "#nav-personality",
   navGallery: "#nav-gallery",
   navContact: "#nav-contact",
+  themeDark: "#theme-dark",
+  themeLight: "#theme-light",
   heroKicker: "#hero-kicker",
   heroSubtitle: "#hero-subtitle",
   heroLead: "#hero-lead",
@@ -332,6 +382,13 @@ function updateLanguageButtons() {
   if (!langEnBtn || !langJaBtn) return;
   langEnBtn.classList.toggle("is-active", currentLanguage === "en");
   langJaBtn.classList.toggle("is-active", currentLanguage === "ja");
+}
+
+function updateThemeButtons() {
+  if (!themeDarkBtn || !themeLightBtn) return;
+  const active = document.documentElement.getAttribute("data-theme") || "dark";
+  themeDarkBtn.classList.toggle("is-active", active === "dark");
+  themeLightBtn.classList.toggle("is-active", active === "light");
 }
 
 function applyLanguageText() {
@@ -637,6 +694,30 @@ function setupLanguageSwitch() {
   langJaBtn.addEventListener("click", () => setLanguage("ja"));
 }
 
+function setThemeOverride(theme) {
+  if (!["dark", "light"].includes(theme)) return;
+
+  clearThemeQueryParam();
+  forcedTheme = null;
+
+  if (userThemeOverride === theme) {
+    userThemeOverride = null;
+    persistThemeOverride(null);
+    applyThemeFromPreferences();
+    return;
+  }
+
+  userThemeOverride = theme;
+  persistThemeOverride(theme);
+  setTheme(theme);
+}
+
+function setupThemeSwitch() {
+  if (!themeDarkBtn || !themeLightBtn) return;
+  themeDarkBtn.addEventListener("click", () => setThemeOverride("dark"));
+  themeLightBtn.addEventListener("click", () => setThemeOverride("light"));
+}
+
 function getAnchorOffset(targetId) {
   const headerHeight = siteHeader ? siteHeader.getBoundingClientRect().height : 0;
   const stickyTopGap = 14;
@@ -685,11 +766,13 @@ function setupReveal() {
 }
 
 loadSavedLanguage();
+loadSavedThemeOverride();
 applyThemeFromPreferences();
 watchThemePreferenceChanges();
 applyLanguageText();
 ensureGalleryVisible();
 setupLanguageSwitch();
+setupThemeSwitch();
 setupAnchorScrolling();
 setupReveal();
 loadInstagramData();
