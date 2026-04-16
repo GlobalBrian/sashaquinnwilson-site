@@ -1,7 +1,15 @@
 {
-  "updatedAt": "2026-04-16T03:47:56.770Z",
+  "updatedAt": "2026-04-16T08:05:05.451Z",
   "source": "instagram_graph_api",
   "posts": [
+    {
+      "id": "18087818492580657",
+      "caption": "❤❤❤\n.\n.\n.\n.\n.\n\nBrand @fith_official @fith_online_store @fith_brand\n\n#kidsfashion #fith #フィス #fithonlinestore #fithbrand",
+      "mediaType": "IMAGE",
+      "mediaUrl": "./content/ig/18087818492580657.jpg",
+      "permalink": "https://www.instagram.com/p/DXLbjyzFQjb/",
+      "timestamp": "2026-04-16T04:09:16+0000"
+    },
     {
       "id": "18112306522616115",
       "caption": "❤❤❤\n\n.\n.\n.\n.\n.\n\nBrand @emporioarmani @hankyu_hug_family\n\n#阪急うめだ本店 #うめはんキッズベビー #emporioarmani #EMPOLIOARMANI",
@@ -185,14 +193,6 @@
       "mediaUrl": "./content/ig/17864510310462862.jpg",
       "permalink": "https://www.instagram.com/p/DOmbSr1E2h_/",
       "timestamp": "2025-09-14T23:03:50+0000"
-    },
-    {
-      "id": "17887325310345833",
-      "caption": "❤❤❤\n.\n.\n. \n.\n.\n\nBrand \n@evercloset_fashion\n\n#エバクロ #エバークローゼット #evercloset #キッズコーデ",
-      "mediaType": "IMAGE",
-      "mediaUrl": "./content/ig/17887325310345833.jpg",
-      "permalink": "https://www.instagram.com/p/DN9lVQIgY5i/",
-      "timestamp": "2025-08-30T02:22:42+0000"
     }
   ]
 }
