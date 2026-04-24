@@ -2,7 +2,7 @@ import { mkdir, writeFile } from "node:fs/promises";
 import { extname, resolve } from "node:path";
 
 const accessToken = (process.env.IG_ACCESS_TOKEN || "").trim();
-const userId = process.env.IG_USER_ID;
+const userId = (process.env.IG_USER_ID || "").trim();
 const postLimit = Number(process.env.IG_POST_LIMIT || 24);
 
 if (!accessToken || !userId) {
@@ -12,9 +12,11 @@ if (!accessToken || !userId) {
 
 const graphVersion = process.env.IG_GRAPH_VERSION || "v23.0";
 
-function buildEndpoint(baseUrl, withVersion = true) {
+function buildEndpoint(baseUrl, options = {}) {
+  const { withVersion = true, target = "user" } = options;
   const versionSegment = withVersion ? `/${graphVersion}` : "";
-  const endpoint = new URL(`${baseUrl}${versionSegment}/${userId}/media`);
+  const targetSegment = target === "me" ? "/me/media" : `/${userId}/media`;
+  const endpoint = new URL(`${baseUrl}${versionSegment}${targetSegment}`);
   endpoint.searchParams.set(
     "fields",
     "id,caption,media_type,media_url,thumbnail_url,permalink,timestamp"
@@ -25,24 +27,83 @@ function buildEndpoint(baseUrl, withVersion = true) {
 }
 
 const endpoints = [
-  buildEndpoint("https://graph.facebook.com", true),
-  buildEndpoint("https://graph.instagram.com", true),
-  buildEndpoint("https://graph.instagram.com", false)
+  {
+    label: "facebook-user-versioned",
+    url: buildEndpoint("https://graph.facebook.com", { withVersion: true, target: "user" })
+  },
+  {
+    label: "facebook-me-versioned",
+    url: buildEndpoint("https://graph.facebook.com", { withVersion: true, target: "me" })
+  },
+  {
+    label: "instagram-user-versioned",
+    url: buildEndpoint("https://graph.instagram.com", { withVersion: true, target: "user" })
+  },
+  {
+    label: "instagram-me-versioned",
+    url: buildEndpoint("https://graph.instagram.com", { withVersion: true, target: "me" })
+  },
+  {
+    label: "instagram-user-unversioned",
+    url: buildEndpoint("https://graph.instagram.com", { withVersion: false, target: "user" })
+  },
+  {
+    label: "instagram-me-unversioned",
+    url: buildEndpoint("https://graph.instagram.com", { withVersion: false, target: "me" })
+  }
 ];
+
+function parseApiBody(text) {
+  try {
+    return JSON.parse(text);
+  } catch {
+    return null;
+  }
+}
+
+function formatApiError(error) {
+  const errorMessage = error.payload?.error?.message || error.raw;
+  const errorCode = error.payload?.error?.code;
+  const errorType = error.payload?.error?.type;
+  const parts = [`${error.label}: ${error.status}`];
+
+  if (errorCode) parts.push(`code ${errorCode}`);
+  if (errorType) parts.push(errorType);
+  if (errorMessage) parts.push(errorMessage);
+
+  return parts.join(" ");
+}
+
+function isTokenError(error) {
+  const code = error.payload?.error?.code;
+  const message = (error.payload?.error?.message || error.raw || "").toLowerCase();
+  return (
+    code === 190 ||
+    message.includes("access token") ||
+    message.includes("oauth") ||
+    message.includes("session has expired")
+  );
+}
 
 async function fetchPosts() {
   const errors = [];
 
   for (const endpoint of endpoints) {
-    const response = await fetch(endpoint.toString());
+    const response = await fetch(endpoint.url.toString());
     if (!response.ok) {
       const body = await response.text();
-      errors.push(`${endpoint.origin}: ${response.status} ${body}`);
+      errors.push({
+        label: endpoint.label,
+        status: response.status,
+        payload: parseApiBody(body),
+        raw: body
+      });
       continue;
     }
 
     const payload = await response.json();
     const media = Array.isArray(payload.data) ? payload.data : [];
+    console.log(`Instagram sync using ${endpoint.label}`);
 
     return media
       .filter((item) => item.media_url || item.thumbnail_url)
@@ -56,7 +117,16 @@ async function fetchPosts() {
       }));
   }
 
-  throw new Error(`Instagram Graph API failed for all endpoints: ${errors.join(" | ")}`);
+  const tokenError = errors.find(isTokenError);
+  if (tokenError) {
+    throw new Error(
+      `Instagram access token is invalid or expired. Regenerate IG_ACCESS_TOKEN in GitHub repository secrets, then rerun the workflow. Last API response: ${formatApiError(tokenError)}`
+    );
+  }
+
+  throw new Error(
+    `Instagram Graph API failed for all endpoints: ${errors.map(formatApiError).join(" | ")}`
+  );
 }
 
 async function main() {
