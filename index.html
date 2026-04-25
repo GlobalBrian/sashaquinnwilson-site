@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
     <title>Sasha Quinn Wilson | Official Portfolio</title>
     <meta
       name="description"
@@ -21,7 +22,28 @@
       href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Outfit:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260221e" />
+    <script>
+      (() => {
+        try {
+          const params = new URLSearchParams(window.location.search);
+          const requested = params.get("theme");
+          const saved = localStorage.getItem("sqw-theme-override-v2");
+          const forced = requested === "bright" ? "dark" : requested;
+          const theme =
+            forced === "dark" || forced === "light"
+              ? forced
+              : saved === "dark" || saved === "light"
+                ? saved
+                : window.matchMedia("(prefers-color-scheme: dark)").matches
+                  ? "dark"
+                  : "light";
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (_) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
+    <link rel="stylesheet" href="./styles.css?v=20260425a" />
   </head>
   <body>
     <div class="backdrop" aria-hidden="true"></div>
@@ -233,6 +255,6 @@
       </article>
     </template>
 
-    <script src="./app.js?v=20260221d" type="module"></script>
+    <script src="./app.js?v=20260425a" type="module"></script>
   </body>
 </html>

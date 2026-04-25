@@ -17,7 +17,7 @@ const inlineFallbackImage =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#182033"/><stop offset="50%" stop-color="#2b3f66"/><stop offset="100%" stop-color="#402942"/></linearGradient></defs><rect width="1200" height="1200" fill="url(#g)"/><circle cx="250" cy="210" r="130" fill="#ffcc77" fill-opacity=".22"/><circle cx="970" cy="980" r="180" fill="#7bc1ff" fill-opacity=".2"/><text x="50%" y="50%" text-anchor="middle" fill="#f4f6fb" font-size="64" font-family="Arial, sans-serif">Sasha Quinn Wilson</text></svg>`
   );
 const languageStorageKey = "sqw-language";
-const themeStorageKey = "sqw-theme";
+const themeStorageKey = "sqw-theme-override-v2";
 
 let currentPosts = [];
 let currentLanguage = "en";
@@ -48,19 +48,19 @@ function applyThemeFromPreferences() {
     return;
   }
 
-  const prefersLight =
+  const prefersDark =
     typeof window !== "undefined" &&
     typeof window.matchMedia === "function" &&
-    window.matchMedia("(prefers-color-scheme: light)").matches;
-  setTheme(prefersLight ? "light" : "dark");
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  setTheme(prefersDark ? "dark" : "light");
 }
 
 function watchThemePreferenceChanges() {
   if (typeof window.matchMedia !== "function") return;
-  const media = window.matchMedia("(prefers-color-scheme: light)");
+  const media = window.matchMedia("(prefers-color-scheme: dark)");
   const onChange = (event) => {
     if (forcedTheme || userThemeOverride) return;
-    setTheme(event.matches ? "light" : "dark");
+    setTheme(event.matches ? "dark" : "light");
   };
 
   if (typeof media.addEventListener === "function") {
