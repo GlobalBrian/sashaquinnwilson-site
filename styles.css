@@ -16,6 +16,9 @@
   --caption-bg: rgba(11, 14, 24, 0.65);
   --footer-text: #aea999;
   --tag-bg: rgba(255, 255, 255, 0.04);
+  --hero-subtitle-bg: linear-gradient(92deg, rgba(255, 213, 93, 0.95), rgba(255, 127, 93, 0.88));
+  --hero-subtitle-color: #17233a;
+  --hero-subtitle-border: rgba(255, 245, 198, 0.72);
   --tone-pill-1-bg: rgba(219, 233, 255, 0.14);
   --tone-pill-1-color: #e9f2ff;
   --tone-pill-1-border: rgba(164, 200, 255, 0.45);
@@ -48,6 +51,9 @@ html[data-theme="light"] {
   --caption-bg: rgba(241, 247, 255, 0.88);
   --footer-text: #4f607e;
   --tag-bg: rgba(24, 37, 63, 0.09);
+  --hero-subtitle-bg: linear-gradient(92deg, #ffd45a, #ff9968);
+  --hero-subtitle-color: #17233a;
+  --hero-subtitle-border: rgba(162, 108, 22, 0.28);
   --tone-pill-1-bg: rgba(67, 112, 177, 0.18);
   --tone-pill-1-color: #1d3d6e;
   --tone-pill-1-border: rgba(67, 112, 177, 0.38);
@@ -298,14 +304,20 @@ h1 {
 }
 
 h1 span {
-  display: block;
+  display: inline-block;
   font-family: "Outfit", sans-serif;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: clamp(0.92rem, 2.1vw, 1.2rem);
-  color: var(--pop-1);
-  margin-top: 0.85rem;
+  color: var(--hero-subtitle-color);
+  margin-top: 0.9rem;
+  padding: 0.16rem 0.44rem 0.2rem;
+  border: 1px solid var(--hero-subtitle-border);
+  border-radius: 0.3rem;
+  background: var(--hero-subtitle-bg);
+  box-shadow: 0 12px 24px rgba(255, 127, 93, 0.18);
+  line-height: 1;
 }
 
 .lead {
